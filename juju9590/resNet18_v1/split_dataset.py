@@ -3,8 +3,11 @@ from pathlib import Path
 
 random.seed(42)
 
-SRC_NORMAL = Path("cache/data/normal")
-SRC_WRONG  = Path("cache/data/wrongway")
+# 🔥 Google Drive에 있는 실제 데이터 경로
+DATA_ROOT = Path("/content/drive/MyDrive/data")
+
+SRC_NORMAL = DATA_ROOT / "normal"
+SRC_WRONG  = DATA_ROOT / "wrongway"
 
 OUT = Path(r"dataset")  # 최종 분리 폴더
 splits = {"train":0.7, "val":0.15, "test":0.15}
@@ -37,6 +40,9 @@ def main():
     copy_split(SRC_NORMAL, "normal")
     copy_split(SRC_WRONG,  "wrongway")
     print("✅ done:", OUT.resolve())
+
+    print("normal count:", len(list(SRC_NORMAL.glob("*"))))
+    print("wrongway count:", len(list(SRC_WRONG.glob("*"))))
 
 if __name__ == "__main__":
     main()
